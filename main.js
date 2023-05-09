@@ -3,7 +3,7 @@ import './style.css';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
-import { CornerPiece } from './cube'
+import { RubixCube } from './RubixCube'
 
 const scene = new THREE.Scene();
 
@@ -53,11 +53,16 @@ renderer.render(scene, camera);
 // cubeComponents[24].position.set (-1,  0,  1);
 // cubeComponents[25].position.set ( 1,  0, -1);
 
-const e = CornerPiece( 0xff8800, 0xffff00);
-const c = CornerPiece( 0xff8800, 0xffff00, 0x22ccff);
-scene.add( c, e );
+// const center = CenterPiece( 0xff8800 );
+// const e = EdgePiece( 0xff8800, 0xffff00);
+// const c = CornerPiece( 0xff8800, 0xffff00, 0x22ccff);
+// scene.add( c, e, center );
 
-e.position.set(2, 0, 0)
+// e.position.set(2, 0, 0)
+// center.position.set(4, 0, 0)
+
+const cube = new RubixCube();
+scene.add( cube );
 
 // Helpers
 const gridHelper = new THREE.GridHelper(200, 50);
