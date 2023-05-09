@@ -3,7 +3,7 @@ import './style.css';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
-import { RubixCube } from './RubixCube'
+import { RubiksCube } from './RubiksCube'
 
 const scene = new THREE.Scene();
 
@@ -61,7 +61,7 @@ renderer.render(scene, camera);
 // e.position.set(2, 0, 0)
 // center.position.set(4, 0, 0)
 
-const cube = new RubixCube();
+const cube = new RubiksCube();
 scene.add( cube );
 
 // Helpers

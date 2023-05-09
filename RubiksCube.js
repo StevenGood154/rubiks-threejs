@@ -16,7 +16,7 @@ const white = 0xffffff;
 const size = 0.8;
 
 
-class RubixCube extends THREE.Object3D {
+class RubiksCube extends THREE.Object3D {
   constructor() {
     super();
 
@@ -150,4 +150,4 @@ class CenterPiece extends CornerPiece {
   }
 }
 
-export { RubixCube };
+export { RubiksCube };
