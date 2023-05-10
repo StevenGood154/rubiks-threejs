@@ -214,8 +214,48 @@ class RubiksCube extends THREE.Object3D {
     this.pieces[22] = tempEdgePiece;
   }
 
+  rotateFrontFaceClockwise() {
+    const backFaceIndices = [6, 7, 8, 14, 15, 16, 23, 24, 25];
+    backFaceIndices.forEach((i) => {
+      const rotationMatrix = new THREE.Matrix4().makeRotationAxis(new THREE.Vector3(0, 0, -1).normalize(), Math.PI / 2);
+      this.pieces[i].position.applyMatrix4(rotationMatrix);
+      this.pieces[i].quaternion.premultiply(new THREE.Quaternion().setFromRotationMatrix(rotationMatrix));
+    })
+
+    const tempCornerPiece = this.pieces[6];
+    this.pieces[6] = this.pieces[23];
+    this.pieces[23] = this.pieces[25];
+    this.pieces[25] = this.pieces[8];
+    this.pieces[8] = tempCornerPiece;
+    const tempEdgePiece = this.pieces[7];
+    this.pieces[7] = this.pieces[14];
+    this.pieces[14] = this.pieces[24];
+    this.pieces[24] = this.pieces[16];
+    this.pieces[16] = tempEdgePiece;
+  }
+
+  rotateFrontFaceCounterClockwise() {
+    const backFaceIndices = [6, 7, 8, 14, 15, 16, 23, 24, 25];
+    backFaceIndices.forEach((i) => {
+      const rotationMatrix = new THREE.Matrix4().makeRotationAxis(new THREE.Vector3(0, 0, 1).normalize(), Math.PI / 2);
+      this.pieces[i].position.applyMatrix4(rotationMatrix);
+      this.pieces[i].quaternion.premultiply(new THREE.Quaternion().setFromRotationMatrix(rotationMatrix));
+    })
+
+    const tempCornerPiece = this.pieces[6];
+    this.pieces[6] = this.pieces[8];
+    this.pieces[8] = this.pieces[25];
+    this.pieces[25] = this.pieces[23];
+    this.pieces[23] = tempCornerPiece;
+    const tempEdgePiece = this.pieces[7];
+    this.pieces[7] = this.pieces[16];
+    this.pieces[16] = this.pieces[24];
+    this.pieces[24] = this.pieces[14];
+    this.pieces[14] = tempEdgePiece;
+  }
+
   rotateBackFaceClockwise() {
-    const backFaceIndices = [0, 1, 2, 9, 10, 11, 17, 18, 19]
+    const backFaceIndices = [0, 1, 2, 9, 10, 11, 17, 18, 19];
       backFaceIndices.forEach((i) => {
       const rotationMatrix = new THREE.Matrix4().makeRotationAxis(new THREE.Vector3(0, 0, 1).normalize(), Math.PI / 2);
       this.pieces[i].position.applyMatrix4(rotationMatrix);
@@ -232,23 +272,10 @@ class RubiksCube extends THREE.Object3D {
     this.pieces[11] = this.pieces[18];
     this.pieces[18] = this.pieces[9];
     this.pieces[9] = tempEdgePiece;    
-    // Piece order:
-
-    //  0,  1,  2,
-    //  3,  4,  5,  top
-    //  6,  7,  8,
-  
-    //  9, 10, 11,
-    // 12,     13,  middle
-    // 14, 15, 16,
-  
-    // 17, 18, 19,
-    // 20, 21, 22, bottom
-    // 23, 24, 25,
   }
 
   rotateBackFaceCounterClockwise() {
-    const backFaceIndices = [0, 1, 2, 9, 10, 11, 17, 18, 19]
+    const backFaceIndices = [0, 1, 2, 9, 10, 11, 17, 18, 19];
     backFaceIndices.forEach((i) => {
       const rotationMatrix = new THREE.Matrix4().makeRotationAxis(new THREE.Vector3(0, 0, -1).normalize(), Math.PI / 2);
       this.pieces[i].position.applyMatrix4(rotationMatrix);
@@ -267,12 +294,84 @@ class RubiksCube extends THREE.Object3D {
     this.pieces[11] = tempEdgePiece;  
   }
 
-  rotateFrontFaceClockwise() {
-    console.log("Todo")
+  rotateRightFaceClockwise() {
+    const backFaceIndices = [2, 5, 8, 11, 13, 16, 19, 22, 25];
+    backFaceIndices.forEach((i) => {
+      const rotationMatrix = new THREE.Matrix4().makeRotationAxis(new THREE.Vector3(-1, 0, 0).normalize(), Math.PI / 2);
+      this.pieces[i].position.applyMatrix4(rotationMatrix);
+      this.pieces[i].quaternion.premultiply(new THREE.Quaternion().setFromRotationMatrix(rotationMatrix));
+    })
+
+    const tempCornerPiece = this.pieces[2];
+    this.pieces[2] = this.pieces[8];
+    this.pieces[8] = this.pieces[25];
+    this.pieces[25] = this.pieces[19];
+    this.pieces[19] = tempCornerPiece;
+    const tempEdgePiece = this.pieces[5];
+    this.pieces[5] = this.pieces[16];
+    this.pieces[16] = this.pieces[22];
+    this.pieces[22] = this.pieces[11];
+    this.pieces[11] = tempEdgePiece;  
   }
 
-  rotateFrontFaceCounterClockwise() {
-    console.log("Todo")
+  rotateRightFaceCounterClockwise() {
+    const backFaceIndices = [2, 5, 8, 11, 13, 16, 19, 22, 25];
+    backFaceIndices.forEach((i) => {
+      const rotationMatrix = new THREE.Matrix4().makeRotationAxis(new THREE.Vector3(1, 0, 0).normalize(), Math.PI / 2);
+      this.pieces[i].position.applyMatrix4(rotationMatrix);
+      this.pieces[i].quaternion.premultiply(new THREE.Quaternion().setFromRotationMatrix(rotationMatrix));
+    })
+
+    const tempCornerPiece = this.pieces[2];
+    this.pieces[2] = this.pieces[19];
+    this.pieces[19] = this.pieces[25];
+    this.pieces[25] = this.pieces[8];
+    this.pieces[8] = tempCornerPiece;
+    const tempEdgePiece = this.pieces[5];
+    this.pieces[5] = this.pieces[11];
+    this.pieces[11] = this.pieces[22];
+    this.pieces[22] = this.pieces[16];
+    this.pieces[16] = tempEdgePiece;
+  }
+
+  rotateLeftFaceClockwise() {
+    const backFaceIndices = [0, 3, 6, 9, 12, 14, 17, 20, 23];
+    backFaceIndices.forEach((i) => {
+      const rotationMatrix = new THREE.Matrix4().makeRotationAxis(new THREE.Vector3(1, 0, 0).normalize(), Math.PI / 2);
+      this.pieces[i].position.applyMatrix4(rotationMatrix);
+      this.pieces[i].quaternion.premultiply(new THREE.Quaternion().setFromRotationMatrix(rotationMatrix));
+    })
+
+    const tempCornerPiece = this.pieces[0];
+    this.pieces[0] = this.pieces[17];
+    this.pieces[17] = this.pieces[23];
+    this.pieces[23] = this.pieces[6];
+    this.pieces[6] = tempCornerPiece;
+    const tempEdgePiece = this.pieces[3];
+    this.pieces[3] = this.pieces[9];
+    this.pieces[9] = this.pieces[20];
+    this.pieces[20] = this.pieces[14];
+    this.pieces[14] = tempEdgePiece;
+  }
+
+  rotateLeftFaceCounterClockwise() {
+    const backFaceIndices = [0, 3, 6, 9, 12, 14, 17, 20, 23];
+    backFaceIndices.forEach((i) => {
+      const rotationMatrix = new THREE.Matrix4().makeRotationAxis(new THREE.Vector3(-1, 0, 0).normalize(), Math.PI / 2);
+      this.pieces[i].position.applyMatrix4(rotationMatrix);
+      this.pieces[i].quaternion.premultiply(new THREE.Quaternion().setFromRotationMatrix(rotationMatrix));
+    })
+
+    const tempCornerPiece = this.pieces[0];
+    this.pieces[0] = this.pieces[6];
+    this.pieces[6] = this.pieces[23];
+    this.pieces[23] = this.pieces[17];
+    this.pieces[17] = tempCornerPiece;
+    const tempEdgePiece = this.pieces[3];
+    this.pieces[3] = this.pieces[14];
+    this.pieces[14] = this.pieces[20];
+    this.pieces[20] = this.pieces[9];
+    this.pieces[9] = tempEdgePiece;
   }
 }
 

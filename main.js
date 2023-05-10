@@ -51,15 +51,22 @@ window.addEventListener("keydown", (event) => {
   } else if (event.key === "Q") {
     cube.rotateBackFaceCounterClockwise();
   }
+  if (event.key === "e") {
+    cube.rotateRightFaceClockwise();
+  } else if (event.key === "E") {
+    cube.rotateRightFaceCounterClockwise();
+  }
+  if (event.key === "a") {
+    cube.rotateLeftFaceClockwise();
+  } else if (event.key === "A") {
+    cube.rotateLeftFaceCounterClockwise();
+  }
 });
-
 
 function animate() {
   requestAnimationFrame(animate);
 
   controls.update();
-
-
 
   renderer.render(scene, camera);
 }
